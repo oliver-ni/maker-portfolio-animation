@@ -5,13 +5,13 @@ import Animated from "./components/Animated";
 import AnimationProvider, { Animation } from "./components/AnimationProvider";
 
 const SCENES: Animation["scenes"] = {
-  "1": [0, 75],
-  "2": [45, 135],
-  "3": [105, 195],
-  "4": [165, 255],
-  "5": [225, 315],
-  "6": [285, 375],
-  "7": [345, 480],
+  "1": [0, 140],
+  "2": [100, 260],
+  "3": [220, 380],
+  "4": [340, 500],
+  "5": [460, 620],
+  "6": [580, 740],
+  "7": [700, 840],
 };
 
 const Main = () => (
