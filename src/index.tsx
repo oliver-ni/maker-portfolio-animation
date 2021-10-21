@@ -442,7 +442,7 @@ const Main = () => (
 );
 
 const Video = () => (
-  <Composition id="Main" component={Main} durationInFrames={480} fps={60} width={3840} height={2160} />
+  <Composition id="Main" component={Main} durationInFrames={840} fps={60} width={3840} height={2160} />
 );
 
 registerRoot(Video);
