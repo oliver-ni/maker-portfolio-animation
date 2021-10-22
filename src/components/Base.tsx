@@ -8,15 +8,19 @@ export type BaseProps = PropsWithChildren<{
   h?: number;
   s?: Property.Scale;
   o?: Property.Opacity;
+  r?: number;
+  boxShadow?: Property.BoxShadow;
   backgroundColor?: Property.BackgroundColor;
   borderColor?: Property.BackgroundColor;
   borderStyle?: Property.BorderStyle;
   color?: Property.Color;
   fontSize?: number;
+  fontFamily?: Property.FontFamily;
+  fontWeight?: Property.FontWeight;
   label?: string | ReactNode;
   bottomLabel?: string | ReactNode;
   justifyContent?: Property.JustifyContent;
-  labelHeight?: number;
+  labelProp?: number;
   renderLabel?: (height: number) => ReactNode;
 }>;
 
@@ -27,15 +31,19 @@ const Base = ({
   h = 0,
   s = 1,
   o = 1,
+  r = 0,
+  boxShadow,
   backgroundColor = "white",
   borderColor,
   borderStyle = "solid",
   color = "black",
   fontSize = 64,
+  fontFamily = "Jetbrains Mono",
+  fontWeight = "bold",
   label,
   bottomLabel,
   justifyContent = "center",
-  labelHeight = 0,
+  labelProp = 0,
   renderLabel,
   children,
 }: BaseProps) => (
@@ -47,8 +55,9 @@ const Base = ({
       width: w,
       height: h,
       opacity: o,
-      transform: `translateX(-50%) translateY(-50%) scale(${s})`,
+      transform: `translateX(-50%) translateY(-50%) scale(${s}) rotate(${r}deg)`,
 
+      boxShadow,
       backgroundColor,
       borderColor,
       color,
@@ -63,8 +72,8 @@ const Base = ({
       textAlign: "center",
 
       fontSize,
-      fontFamily: "Jetbrains Mono",
-      fontWeight: "bold",
+      fontFamily,
+      fontWeight,
     }}
   >
     {bottomLabel && (
@@ -87,7 +96,7 @@ const Base = ({
     )}
 
     {label}
-    {renderLabel && renderLabel(labelHeight)}
+    {renderLabel && renderLabel(labelProp)}
     {children}
   </div>
 );

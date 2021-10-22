@@ -7,15 +7,16 @@ const ANIMATE_AFTER = ["o", "s"];
 
 export type AnimatedProps = BaseProps & {
   scenes?: { [key: string]: Partial<BaseProps> };
+  offset?: number;
 };
 
-const Animated = ({ scenes = {}, ...props }: AnimatedProps) => {
+const Animated = ({ scenes = {}, offset = 0, ...props }: AnimatedProps) => {
   const frame = useCurrentFrame();
   const animation = useAnimation();
 
   // Current scene
   const _scenes = Object.entries(animation.scenes)
-    .filter(([, v]) => v[0] <= frame && frame < v[1])
+    .filter(([, v]) => v[0] <= frame && frame < v[1] + 40)
     .map(([k]) => k);
 
   if (_scenes.length === 0) return null;
@@ -44,12 +45,12 @@ const Animated = ({ scenes = {}, ...props }: AnimatedProps) => {
       return frame >= fromFrame + duration / 2 ? toValue : fromValue;
     }
 
-    let offset = ANIMATE_AFTER.includes(key) ? duration / 3 : 0;
-    if (offset !== 0 && toValue === 0) offset = -offset;
+    let sectionOffset = ANIMATE_AFTER.includes(key) ? duration / 3 : 0;
+    if (sectionOffset !== 0 && toValue < fromValue) sectionOffset = -sectionOffset;
 
     return interpolate(
       frame,
-      [fromFrame + duration / 3 + offset, toFrame - duration / 3 + offset],
+      [fromFrame + duration / 3 + offset + sectionOffset, toFrame - duration / 3 + offset + sectionOffset],
       [fromValue, toValue],
       INTERPOLATE_OPTS
     );
