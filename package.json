@@ -5,6 +5,7 @@
   "scripts": {
     "start": "remotion preview src/index.tsx",
     "build": "remotion render src/index.tsx Main out/video.mov",
+    "build:recordings": "remotion render src/index.tsx Recordings out/recordings.mov --image-format=png --pixel-format=yuva444p10le --codec=prores --prores-profile=4444",
     "upgrade": "remotion upgrade",
     "server": "ts-node server.tsx"
   },

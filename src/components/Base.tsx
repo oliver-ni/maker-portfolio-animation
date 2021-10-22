@@ -9,6 +9,7 @@ export type BaseProps = PropsWithChildren<{
   s?: Property.Scale;
   o?: Property.Opacity;
   r?: number;
+  borderRadius?: number;
   boxShadow?: Property.BoxShadow;
   backgroundColor?: Property.BackgroundColor;
   borderColor?: Property.BackgroundColor;
@@ -25,13 +26,14 @@ export type BaseProps = PropsWithChildren<{
 }>;
 
 const Base = ({
-  x = -1000,
-  y = -1000,
+  x = -10000,
+  y = -10000,
   w = 0,
   h = 0,
   s = 1,
   o = 1,
   r = 0,
+  borderRadius = 36,
   boxShadow,
   backgroundColor = "white",
   borderColor,
@@ -56,6 +58,7 @@ const Base = ({
       height: h,
       opacity: o,
       transform: `translateX(-50%) translateY(-50%) scale(${s}) rotate(${r}deg)`,
+      overflow: "hidden",
 
       boxShadow,
       backgroundColor,
@@ -63,7 +66,7 @@ const Base = ({
       color,
       borderWidth: borderColor && (w >= 450 && h >= 240 ? 15 : 10),
       borderStyle: borderColor && borderStyle,
-      borderRadius: 36,
+      borderRadius,
 
       display: "flex",
       flexDirection: "column",
